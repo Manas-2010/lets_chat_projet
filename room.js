@@ -8,35 +8,40 @@ const firebaseConfig = {
     appId: "1:164275295070:web:62899d4eaf91dae3f5b5cf"
   };
   
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  username = localStorage.getItem("username");
-  document.getElementById("username").innerHTML = 'Wellcome '+ username+'!';
-function addRoom(){
-  room_name = document.getElementById("text").value;
-  firebase.database().ref("/").child(room_name).update({
-    purpose:"adding room name"
-});
-localStorage.setItem("room_name", room_name);
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    username = localStorage.getItem("username");
+
+    function addRoom(){
+   room_name = document.getElementById("text").value;
+   firebase.database().ref("/").child(room_name).update({
+         purpose:"adding room name"
+   });
+   localStorage.setItem("room_name", room_name);
+   window.location = "lets_chat_message.html";
+    }
+
+    function getData(){
+      firebase.database().ref("/").on('value', function(snapshot) 
+      {document.getElementById("output").innerHTML = "";
+      snapshot.forEach(function(childSnapshot) 
+      {childKey  = childSnapshot.key;
+      var Room_names = childKey;
+      //Start code
+      console.log("RoomName = "+Room_names);
+      row = "<div class='room_name' id="+Room_names+"onclick= redirect(this.id)>#"+Room_names+"</div><hr>";
+      document.getElementById("output").innerHTML += row;
+      //End code
+      });});}
+      getData();
+function redirect(name){
+      console.log(name);
+      localStorage.setItem("room_name", name);
+      window.location = "lets_chat_message.html";
 }
 
-function getData(){
-  firebase.database().ref("/").on('value',function(snapshot){
-    document.getElementById("output").innerHTML ="";
-    snapshot.forEach(function(childSnapshot) {
-      childKey = childSnapshot.key;
-      Room_names = childKey;
-          //Start code
-          console.log("RoomName = "+Room_names); 
-          row = "<div class='room_div' id="+Room_name+"onclick='redirectToRoomName(this.id)'>#"+Room_names+"</div><hr>";
-          document.getElementById("output").innerHTML += row;
-          //End code
-        });});}
-getData();
-
-
-function redirectToRoomName(name){
-  console.log(name);
-  localStorage.setItem("room_name", name);
-  window.location = "lets_chat_page.html";
+function log_out(){
+      localStorage.removeItem("username");
+      localStorage.removeItem("room_name");
+      window.location = "index.html";
 }
