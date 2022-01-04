@@ -29,16 +29,16 @@ const firebaseConfig = {
       var Room_names = childKey;
       //Start code
       console.log("RoomName = "+Room_names);
-      row = "<div class='room_name' id="+Room_names+"onclick= redirect(this.id)>#"+Room_names+"</div><hr>";
+      row = "<div class='room_name' style='color='black'' id="+Room_names+"onclick= redirect(this.id)>"+Room_names+"</div><hr>";
       document.getElementById("output").innerHTML += row;
       //End code
       });});}
       getData();
-function redirect(name){
+ function redirect(name){
       console.log(name);
       localStorage.setItem("room_name", name);
       window.location = "lets_chat_message.html";
-}
+ }
 
 function log_out(){
       localStorage.removeItem("username");
