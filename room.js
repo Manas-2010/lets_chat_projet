@@ -1,3 +1,4 @@
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDGEwN9nwlme6gnuNcQure-h0H5b45IcwA",
   authDomain: "kwitter-7c27a.firebaseapp.com",
@@ -8,9 +9,8 @@ const firebaseConfig = {
   appId: "1:344272841830:web:53df82ec5fa7b8b7ca11a7"
 };
 
-  
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
     username = localStorage.getItem("username");
 
     function addRoom(){
